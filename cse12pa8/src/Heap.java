@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class Heap<K,V> implements PriorityQueue {
     // instance variables
-    public List<Entry<K, V>> entries;
+    public List<Entry<K, V>> entries = new ArrayList<Entry<K,V>>();
     public Comparator<K> comparator;
 
     public Heap(Comparator comparator){
@@ -157,7 +157,7 @@ public class Heap<K,V> implements PriorityQueue {
             heapSize = entries.size()-1;
         }
 
-        if(heapSize < entries.size()) {
+        if(heapSize < entries.size()+1) {
 			entries.add(newEntry);
 		} 
 		// NOT SURE IF THIS IS PROPER BEHAVIOR

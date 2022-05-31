@@ -1,10 +1,11 @@
 // import static org.junit.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 public class HeapTest {
 
@@ -18,6 +19,7 @@ public class HeapTest {
     	
     	Heap newTree = new Heap(comparator);
      	newTree.add(50,50);
+		System.out.println(newTree.toArray());
     	
         assertEquals(false, newTree.isEmpty());
     }
