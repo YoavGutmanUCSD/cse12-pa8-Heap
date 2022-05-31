@@ -5,14 +5,18 @@ import java.util.Comparator;
 
 public class Heap<K,V> {
     List<Entry<K,V>> entries;
-    int capacity;
     Comparator comparator;
 
+// 	Comparator<Integer> comparator = new Comparator<Integer>() {
+// 	@Override
+	public int compare(Integer o1, Integer o2) {
+		return Integer.compare(o1, o2);
+	};
 
-    public Heap(int capacity, Comparator comparator){
+
+    public Heap(Comparator comparator){
         // Constructor for the max heap
 		this.entries = new ArrayList<Entry<K,V>>();
-		this.capacity = capacity;
 		this.comparator = comparator;
     }
 
@@ -146,7 +150,12 @@ public class Heap<K,V> {
 	    // Method to add the key value pair in the heap, remember to satisfy max heap Property
 		Entry<K, V> newEntry = new Entry(key, value);
 
-		if(entries.size() < capacity) {
+		int capacity = entries.size() +1;
+		int size = 0;
+		if (entries.size() > 0) {
+			size = entries.size()-1;
+		}
+		if(size < capacity) {
 			entries.add(newEntry);
 		} 
 		// NOT SURE IF THIS IS PROPER BEHAVIOR
@@ -154,7 +163,7 @@ public class Heap<K,V> {
 		else {return;}
 
 		// FIX THIS IF NEEDED
-		bubbleUp(entries.size());
+		bubbleUp(size);
 
 		//System.out.println("Ayowut");
 	}
@@ -203,6 +212,24 @@ public class Heap<K,V> {
     public boolean isEmpty() {
         return entries.size() == 0;
     }
+    
+	public void print() {
+	       
+	      for(int i=0;i<(entries.size()-1)/2;i++){
+	 
+	            System.out.print("Parent Node : " + entries.get(i).key);
+
+				entries.get(getLeftChildIndex(i));
+	             
+				System.out.print( " Left Child Node: " + entries.get(getLeftChildIndex(i)).key);
+			
+				System.out.print(" Right Child Node: "+ entries.get(getRightChildIndex(i)).key);
+				
+				System.out.println(); //for new line
+	             
+	        }
+	           
+	    }
 
 
 
