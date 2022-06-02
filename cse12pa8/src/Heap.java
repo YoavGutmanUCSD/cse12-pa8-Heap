@@ -150,6 +150,10 @@ public class Heap<K,V> implements PriorityQueue {
 
     @Override
     public void add(Object k, Object v) {
+		if(k == null) {
+			return;
+		}
+
         Entry<K,V> newEntry = new Entry(k, v);
 
         int heapSize = 0;
@@ -170,12 +174,15 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
-    public Entry poll() {
+    public Entry poll() throws NoSuchElementException {
+		
         //Method to remove the max element in the heap, remember to satisfy max heap Property
         int heapSize = 0;
         if(entries.size() > 0) {
             heapSize = entries.size()-1;
-        }
+        } else {
+			throw new NoSuchElementException();
+		}
         
         Entry<K,V> maxEntry = peek();
 		Entry<K,V> minEntry = entries.get(entries.size() -1);
@@ -204,6 +211,10 @@ public class Heap<K,V> implements PriorityQueue {
 
     @Override
     public Entry peek() {
+        if(entries.size() <= 0) {
+			throw new NoSuchElementException();
+		}
+
 		// just in case, i'm going to bubble down...
 		if (entries.get(0) != null) {
 			bubbleDown(0); 
