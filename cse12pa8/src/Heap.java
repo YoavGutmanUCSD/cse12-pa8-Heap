@@ -161,12 +161,12 @@ public class Heap<K,V> implements PriorityQueue {
             heapSize = entries.size()-1;
         }
 
-        if(heapSize < entries.size()+1) {
+        //if(heapSize < entries.size()+1) {
 			entries.add(newEntry);
-		} 
-		// NOT SURE IF THIS IS PROPER BEHAVIOR
-		// returning and adding nothing if its at full capacity
-		else {return;}
+		//} 
+		// // NOT SURE IF THIS IS PROPER BEHAVIOR
+		// // returning and adding nothing if its at full capacity
+		// else {return;}
 
 		// FIX THIS IF NEEDED
 		bubbleUp(heapSize);
@@ -174,7 +174,7 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
-    public Entry poll() throws NoSuchElementException {
+    public Entry<K, V> poll() throws NoSuchElementException {
 		
         //Method to remove the max element in the heap, remember to satisfy max heap Property
         int heapSize = 0;
@@ -205,12 +205,13 @@ public class Heap<K,V> implements PriorityQueue {
 		entries.add(0,minEntry);
 
 		bubbleDown(0);
+		bubbleUp(entries.size()-1);
 
 		return maxEntry;
     }
 
     @Override
-    public Entry peek() {
+    public Entry<K, V> peek() {
         if(entries.size() <= 0) {
 			throw new NoSuchElementException();
 		}
@@ -223,7 +224,9 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
-    public List toArray() {
+    public List<Entry<K,V>> toArray() {
+		bubbleDown(0);
+		bubbleUp(entries.size()-1);
         return entries;
     }
 
