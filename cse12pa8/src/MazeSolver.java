@@ -8,8 +8,8 @@ public abstract class MazeSolver {
 		int[] East = {0,1};	
 		int[] West = {0,-1};	
 		
-		// making a list of directions to move in for ez access
-		int directionList[][] = {North, South, East, West};
+		// making a list of directions to move in for easier access
+		int directionList[][] = {North, South, East, West}; 
 
 		
 		// 1. initialize pq to be a new empty heap // This will be done in the tester file
