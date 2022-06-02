@@ -36,7 +36,7 @@ public class HeapTest {
     	Heap newTree = new Heap(comparator);
      	// newTree.add(50,50);
 		// newTree.add(40,50);
-		System.out.println(newTree.poll());
+		//System.out.println(newTree.poll());
 		System.out.println(newTree.toArray());
     	
         assertEquals(true, newTree.isEmpty());
