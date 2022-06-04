@@ -1,4 +1,8 @@
 public abstract class MazeSolver {
+
+	// This will solve a given maze.
+	// It does not return anything, but it does modify the
+	// given maze and solve it, highlighting a path with *s.
 	public static Square solve(Maze maze, PriorityQueue<Integer,Square> pq) {
 
 
@@ -77,7 +81,10 @@ public abstract class MazeSolver {
 		return null;
 	}
 
-
+	// This method checks if there is an available neighor to the given square.
+	// The inputs given are the parameters of the maze and check if its valid.
+	// It is not valid if it is a wall or visited.
+	// Returns true or false depending on if its available.
 	static boolean availableNeighbor(Square[][] contents, Square s, int rowOffset, int colOffset) {
 		
 		// index cannot exceed these vals

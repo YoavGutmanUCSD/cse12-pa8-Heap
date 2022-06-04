@@ -3,11 +3,16 @@ import java.util.NoSuchElementException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+// This is a heap that attempts to emulate a priority queue.
+// It compares keys and sorts using a MaxHeap algorithm.
 public class Heap<K,V> implements PriorityQueue {
     // instance variables
     public List<Entry<K, V>> entries = new ArrayList<Entry<K,V>>();
     public Comparator<K> comparator;
 
+	// Constructor for heap. Only takes comparator as input.
+	// This uses the given comparator to compare keys later.
+	// Initializes entries and comparator.
     public Heap(Comparator comparator){
         // Constructor for the max heap
 		this.entries = new ArrayList<Entry<K,V>>();
@@ -32,6 +37,7 @@ public class Heap<K,V> implements PriorityQueue {
 	}
 
 	// swapping function 
+	//Takes the index of two entries and swaps them.
 	private void swap(int index1, int index2) {
         Entry<K,V> elementToSwap = entries.get(index1);
         entries.set(index1, entries.get(index2));
@@ -40,6 +46,8 @@ public class Heap<K,V> implements PriorityQueue {
 
     	// function that will make the tree satisfy max heap property 
 	// should only take the highest input, index 0
+	// A recursive method that moves the entry at the specified index to a larger index 
+	// (down the tree) while maintaining the heap structure.
 	private void bubbleDown(int index) {
         int heapSize = 0;
         if(entries.size() > 0) {
@@ -105,6 +113,7 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
 	// should take the lowest input! such as the size of entries.
+	// A recursive method that moves the entry at the specified index to a smaller index (up the tree) while maintaining the heap structure. 
 	private void bubbleUp(int index) {
         int heapSize = 0;
         if(entries.size() > 0) {
@@ -149,6 +158,8 @@ public class Heap<K,V> implements PriorityQueue {
 	}
 
     @Override
+	// Insert a new entry with the given key and value to the end of the heap. 
+	// Then, bubbleUp so that the heap properties are not violated
     public void add(Object k, Object v) {
 		if(k == null) {
 			return;
@@ -174,6 +185,10 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
+	// Remove and return the root element in the heap.
+	// Set the last entry in the heap to the root. 
+	// Use bubbleDown to fix the heap after the removal. 
+	// If the size is zero, throw NoSuchElementException()
     public Entry<K, V> poll() throws NoSuchElementException {
 		
         //Method to remove the max element in the heap, remember to satisfy max heap Property
@@ -211,6 +226,8 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
+	// Return the root element of the heap. 
+	// If the size is zero, throw NoSuchElementException()
     public Entry<K, V> peek() {
         if(entries.size() <= 0) {
 			throw new NoSuchElementException();
@@ -224,6 +241,7 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
+	// Return the list of entries.
     public List<Entry<K,V>> toArray() {
 		bubbleDown(0);
 		bubbleUp(entries.size()-1);
@@ -231,12 +249,15 @@ public class Heap<K,V> implements PriorityQueue {
     }
 
     @Override
+	// If the List of entries is empty, return true. Otherwise, return false.
     public boolean isEmpty() {
         return entries.size() == 0;
     }
     
 }
 
+// Holds entries for the heap.
+// Has the key to a value and a toString method.
 class Entry<K, V> {
     K key; // aka the _priority_
     V value;

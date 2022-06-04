@@ -26,7 +26,7 @@ public class HeapTest {
 
 
 	@Test
-    public void addRemoveMin() {
+    public void addThings() {
      	Comparator<Integer> comparator = new Comparator<Integer>() {
 	    	public int compare(Integer o1, Integer o2) {
 	    		return Integer.compare(o1, o2);
@@ -34,12 +34,30 @@ public class HeapTest {
      	};
     	
     	Heap newTree = new Heap(comparator);
-     	// newTree.add(50,50);
-		// newTree.add(40,50);
+     	newTree.add(50,50);
+		newTree.add(40,50);
 		//System.out.println(newTree.poll());
 		System.out.println(newTree.toArray());
     	
-        assertEquals(true, newTree.isEmpty());
+        assertEquals(false, newTree.isEmpty());
+    }
+
+	@Test
+    public void removeBig() {
+     	Comparator<Integer> comparator = new Comparator<Integer>() {
+	    	public int compare(Integer o1, Integer o2) {
+	    		return Integer.compare(o1, o2);
+	    		}
+     	};
+    	
+    	Heap newTree = new Heap(comparator);
+     	newTree.add(50,50);
+		newTree.add(40,50);
+		newTree.add(80,50);
+		assertEquals(newTree.poll(), 80);
+		// System.out.println(newTree.toArray());
+    	
+        // assertEquals(true, newTree.isEmpty());
     }
 
 
